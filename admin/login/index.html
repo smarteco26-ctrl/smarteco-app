@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>SMART.ECO Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { primary: "#006098", surface: "#faf8ff", "surface-container": "#eaedff", "surface-lowest": "#ffffff", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", error: "#ba1a1a" } } } };</script>
+<style>body{font-family:'Inter',sans-serif;background:#faf8ff;}</style>
+</head><body class="min-h-screen flex flex-col items-center justify-center px-6">
+
+<div class="w-full max-w-sm">
+<div class="text-center mb-8">
+<div class="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-3">
+<span class="material-symbols-outlined text-white text-[28px]">admin_panel_settings</span>
+</div>
+<h1 class="text-xl font-bold text-on-surface">SMART.ECO Admin</h1>
+<p class="text-sm text-on-surface-variant mt-1">Accès réservé à l'équipe</p>
+</div>
+
+<form class="flex flex-col gap-3" id="login-form">
+<div class="bg-surface-lowest rounded-2xl shadow-sm overflow-hidden">
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Prénom</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="prenom" required type="text">
+</div>
+<div class="h-[1px] bg-surface-container mx-4"></div>
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Nom</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="nom" required type="text">
+</div>
+<div class="h-[1px] bg-surface-container mx-4"></div>
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Code</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="code" required type="password">
+</div>
+</div>
+<p class="text-sm text-error text-center hidden" id="error-msg">Identifiants incorrects.</p>
+<button class="w-full h-12 rounded-full bg-primary text-white font-semibold" type="submit">Se connecter</button>
+</form>
+</div>
+
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom = document.getElementById('nom').value.trim();
+    const code = document.getElementById('code').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+    errorMsg.classList.add('hidden');
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'apikey': SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify({ prenom, nom, code }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        localStorage.setItem('smarteco_admin_token', data.token);
+        localStorage.setItem('smarteco_admin_nom', `${data.admin.prenom} ${data.admin.nom}`);
+        window.location.href = '../paiements/index.html';
+      } else {
+        errorMsg.classList.remove('hidden');
+      }
+    } catch (err) {
+      errorMsg.textContent = 'Connexion impossible.';
+      errorMsg.classList.remove('hidden');
+    }
+  });
+</script>
+
+</body></html>

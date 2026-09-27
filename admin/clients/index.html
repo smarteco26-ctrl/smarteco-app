@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Clients — SMART.ECO Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { primary: "#006098", surface: "#faf8ff", "surface-container": "#eaedff", "surface-lowest": "#ffffff", "on-surface": "#131b2e", "on-surface-variant": "#3f4851" } } } };</script>
+<style>body{font-family:'Inter',sans-serif;background:#faf8ff;margin:0;}</style>
+</head><body class="min-h-screen flex flex-col">
+
+<header class="sticky top-0 bg-surface/90 backdrop-blur-xl shadow-sm z-10">
+<div class="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
+<h1 class="font-bold text-on-surface">Clients</h1>
+<span class="text-xs text-on-surface-variant" id="admin-name"></span>
+</div>
+<div class="max-w-lg mx-auto px-4 flex gap-4 border-t border-surface-container">
+<a class="py-2.5 text-sm text-on-surface-variant" href="../paiements/index.html">Paiements</a>
+<a class="py-2.5 text-sm font-semibold text-primary border-b-2 border-primary" href="index.html">Clients</a>
+</div>
+</header>
+
+<main class="flex-1 max-w-lg w-full mx-auto px-4 py-4">
+<input class="w-full h-11 px-4 rounded-full bg-surface-lowest shadow-sm mb-4 outline-none text-on-surface" id="recherche" placeholder="Rechercher par nom ou numéro..." type="search">
+<div class="flex flex-col gap-3" id="liste"></div>
+</main>
+
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+  const token = localStorage.getItem('smarteco_admin_token');
+  if (!token) window.location.href = '../login/index.html';
+  document.getElementById('admin-name').textContent = localStorage.getItem('smarteco_admin_nom') || '';
+
+  let clients = [];
+
+  async function charger() {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-clients?token=${encodeURIComponent(token)}`, {
+      headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'apikey': SUPABASE_ANON_KEY },
+    });
+    if (res.status === 401) { window.location.href = '../login/index.html'; return; }
+    const data = await res.json();
+    clients = data.clients || [];
+    rendre(clients);
+  }
+
+  function rendre(liste) {
+    const el = document.getElementById('liste');
+    if (liste.length === 0) {
+      el.innerHTML = `<p class="text-center text-sm text-on-surface-variant py-8">Aucun client.</p>`;
+      return;
+    }
+    el.innerHTML = liste.map(c => {
+      const dernier = (c.vouchers || []).sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+      return `
+      <div class="bg-surface-lowest rounded-2xl shadow-sm p-4">
+        <div class="flex items-center justify-between">
+          <span class="font-semibold text-on-surface">${c.prenom} ${c.nom}</span>
+          <span class="text-xs text-on-surface-variant">${c.telephone}</span>
+        </div>
+        <div class="text-sm text-on-surface-variant mt-1">
+          ${dernier ? `Dernier voucher : ${dernier.plan_id || '—'} × ${dernier.quantite}, ${dernier.montant_htg} HTG (${new Date(dernier.created_at).toLocaleDateString('fr-FR')})` : 'Aucun voucher'}
+        </div>
+        <div class="text-xs text-on-surface-variant mt-0.5">${(c.vouchers || []).length} voucher(s) au total</div>
+      </div>`;
+    }).join('');
+  }
+
+  document.getElementById('recherche').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    rendre(clients.filter(c =>
+      c.prenom.toLowerCase().includes(q) || c.nom.toLowerCase().includes(q) || c.telephone.includes(q)
+    ));
+  });
+
+  charger();
+</script>
+
+</body></html>
