@@ -1,264 +1,89 @@
 <!DOCTYPE html><html class="h-full" lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-lowest": "#ffffff", "surface-bright": "#faf8ff", "on-primary-fixed": "#001d33", "tertiary-container": "#3975c2", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", "surface-dim": "#d2d9f4", "surface-variant": "#dae2fd", "secondary": "#006d3c", "primary": "#006098", "tertiary-fixed": "#d5e3ff", "on-secondary-fixed": "#00210e", "error-container": "#ffdad6", "on-primary-fixed-variant": "#004a77", "inverse-surface": "#283044", "on-tertiary-container": "#fefcff", "tertiary-fixed-dim": "#a6c8ff", "surface-container-high": "#e2e7ff", "error": "#ba1a1a", "on-error-container": "#93000a", "surface-tint": "#00639c", "on-secondary": "#ffffff", "on-secondary-container": "#007440", "on-primary-container": "#fdfcff", "on-tertiary": "#ffffff", "inverse-primary": "#98cbff", "background": "#faf8ff", "outline-variant": "#bfc7d3", "surface-container-low": "#f2f3ff", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#004787", "on-tertiary-fixed": "#001c3b", "primary-fixed": "#cfe5ff", "on-secondary-fixed-variant": "#00522c", "inverse-on-surface": "#eef0ff", "surface-container-highest": "#dae2fd", "tertiary": "#145ca7", "outline": "#707882", "surface": "#faf8ff", "primary-fixed-dim": "#98cbff", "on-error": "#ffffff", "primary-container": "#007abf", "surface-container": "#eaedff", "secondary-fixed": "#72fda8", "secondary-fixed-dim": "#52df8e", "on-background": "#131b2e", "secondary-container": "#72fda8" }, borderRadius: { DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" }, spacing: { "margin-desktop": "2rem", "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2rem", "gutter-sm": "0.75rem" }, fontFamily: { "headline-md": ["Inter"], "label-lg": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-xl": ["Inter"], "body-md": ["Inter"], "headline-xl-mobile": ["Inter"], "numeric-stat": ["Inter"], "label-sm": ["Inter"] }, fontSize: { "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "label-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-sm": ["20px", { lineHeight: "25px", letterSpacing: "-0.012em", fontWeight: "600" }], "label-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "34px", letterSpacing: "-0.018em", fontWeight: "700" }], "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "body-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-xl": ["34px", { lineHeight: "41px", letterSpacing: "-0.022em", fontWeight: "700" }], "body-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "400" }], "headline-xl-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "700" }], "numeric-stat": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "700" }], "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }] } } } };</script><style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 px-margin flex items-center justify-between"><button aria-label="Retour" class="w-11 h-11 -ml-space-xs rounded-full flex items-center justify-center text-primary active:scale-95 active:bg-surface-container transition-all" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span></button><div class="flex items-center gap-space-xs"><span class="font-label-md text-label-md text-on-surface tracking-tight font-semibold">Access Point</span></div><div class="flex items-center justify-end w-11 h-11"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VflyX0hjrP5abvjnGunV6O9BveTVROzJNY4nhH1E-zcGtzZfbfkhyQIusDIDs5cObwTlpaBBaBmA7sDxCQ-o7cW9yCk5VNGbamkwIj3SHPBguXuG57ymXrc6BtFnKmH9qFJULXu2MhSbXp0Inw4ikKkYoG8dnnTV9a6rtU2aqWX5RGhiERrftaO8IqBEj0d1UtdXni9I3FSNQQ-ODHrTqsIyUvhtxJGl8HTQqN9CF_adI_z-jwOW6nw4tfZjy-ZB6koQujmFSAcw"></div></div></header><main class="flex-1 flex flex-col relative w-full pt-14 pb-safe bg-surface"><div class="flex flex-col w-full px-margin pb-space-xl">
-<!-- Celebration Top State -->
-<div class="flex flex-col items-center text-center mt-space-sm mb-space-lg">
-<div class="relative flex items-center justify-center w-20 h-20 mb-space-sm">
-<div class="absolute inset-0 rounded-full bg-secondary-fixed opacity-60 animate-ping"></div>
-<div class="relative w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center shadow-lg shadow-secondary/20">
-<span class="material-symbols-outlined text-on-secondary-container text-[36px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-lowest": "#ffffff", "surface-bright": "#faf8ff", "on-primary-fixed": "#001d33", "tertiary-container": "#3975c2", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", "surface-dim": "#d2d9f4", "surface-variant": "#dae2fd", "secondary": "#006d3c", "primary": "#006098", "tertiary-fixed": "#d5e3ff", "on-secondary-fixed": "#00210e", "error-container": "#ffdad6", "on-primary-fixed-variant": "#004a77", "inverse-surface": "#283044", "on-tertiary-container": "#fefcff", "tertiary-fixed-dim": "#a6c8ff", "surface-container-high": "#e2e7ff", "error": "#ba1a1a", "on-error-container": "#93000a", "surface-tint": "#00639c", "on-secondary": "#ffffff", "on-secondary-container": "#007440", "on-primary-container": "#fdfcff", "on-tertiary": "#ffffff", "inverse-primary": "#98cbff", "background": "#faf8ff", "outline-variant": "#bfc7d3", "surface-container-low": "#f2f3ff", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#004787", "on-tertiary-fixed": "#001c3b", "primary-fixed": "#cfe5ff", "on-secondary-fixed-variant": "#00522c", "inverse-on-surface": "#eef0ff", "surface-container-highest": "#dae2fd", "tertiary": "#145ca7", "outline": "#707882", "surface": "#faf8ff", "primary-fixed-dim": "#98cbff", "on-error": "#ffffff", "primary-container": "#007abf", "surface-container": "#eaedff", "secondary-fixed": "#72fda8", "secondary-fixed-dim": "#52df8e", "on-background": "#131b2e", "secondary-container": "#72fda8" }, borderRadius: { DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" }, spacing: { "margin-desktop": "2rem", "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2rem", "gutter-sm": "0.75rem" }, fontFamily: { "headline-md": ["Inter"], "label-lg": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-xl": ["Inter"], "body-md": ["Inter"], "headline-xl-mobile": ["Inter"], "numeric-stat": ["Inter"], "label-sm": ["Inter"] }, fontSize: { "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "label-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-sm": ["20px", { lineHeight: "25px", letterSpacing: "-0.012em", fontWeight: "600" }], "label-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "34px", letterSpacing: "-0.018em", fontWeight: "700" }], "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "body-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-xl": ["34px", { lineHeight: "41px", letterSpacing: "-0.022em", fontWeight: "700" }], "body-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "400" }], "headline-xl-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "700" }], "numeric-stat": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "700" }], "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }] } } } };</script><style>body{min-height:max(884px,100dvh);}</style></head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
+
+<header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-14 px-margin flex items-center justify-between"><button aria-label="Retour" class="w-11 h-11 -ml-space-xs rounded-full flex items-center justify-center text-primary active:scale-95 active:bg-surface-container transition-all" onclick="window.location.href='../accueil_smart.eco/code.html'" type="button"><span class="material-symbols-outlined text-[24px]">close</span></button><span class="font-label-md text-label-md text-on-surface tracking-tight font-semibold">Votre voucher</span><div class="w-11 h-11"></div></div></header>
+
+<main class="flex-1 flex flex-col relative w-full pt-14 pb-space-xl bg-surface">
+<div class="flex flex-col w-full max-w-[430px] mx-auto px-margin">
+
+<div class="flex flex-col items-center text-center mt-space-md mb-space-lg">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-on-secondary-container text-[32px]">check</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight">Paiement réussi</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs" id="plan-nom">Votre accès est prêt</p>
+</div>
+
+<div class="w-full rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden mb-space-lg">
+<div class="p-space-lg flex flex-col items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Code voucher</span>
+<span class="font-numeric-stat text-[28px] text-primary tracking-widest select-all" id="voucherCode">—</span>
+</div>
+<div class="px-space-lg pb-space-lg">
+<button class="w-full h-12 rounded-full bg-surface-container text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2" id="copyBtn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="copyIcon">content_copy</span>
+<span id="copyText">Copier le code</span>
+</button>
 </div>
 </div>
-<span class="font-headline-md text-headline-md text-on-surface tracking-tight">Paiement réussi !</span>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mt-space-xs">
-      Votre accès internet SMART.ECO est prêt à être activé.
-    </p>
-<!-- Haitian Telemetry Signal Pill -->
-<div class="inline-flex items-center gap-space-xs mt-space-sm px-space-md py-space-xs rounded-full bg-surface-container shadow-sm">
-<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Borne : Dubout</span>
-<span class="font-label-sm text-label-sm text-outline-variant">•</span>
+
+<div class="w-full rounded-2xl bg-surface-container p-space-md mb-space-lg flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Comment l'utiliser</span>
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-[12px] shrink-0 mt-0.5">1</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Connectez-vous au réseau Wi-Fi SMART.ECO</span>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-[12px] shrink-0 mt-0.5">2</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Entrez ce code sur la page qui s'ouvre automatiquement</span>
+</div>
+</div>
+
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-semibold" onclick="window.location.href='../accueil_smart.eco/code.html'" type="button">Retour à l'accueil</button>
+
+<div class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 -translate-y-2" id="toastNotification">
+<div class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-inverse-surface text-inverse-on-surface shadow-lg">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+<span class="font-label-sm text-label-sm font-medium">Code copié</span>
+</div>
+</div>
 
 </div>
-</div>
-<!-- Digital Voucher Ticket (Bons WiFi) -->
-<div class="relative w-full rounded-2xl bg-surface-container-lowest shadow-xl overflow-hidden mb-space-lg">
-<!-- Gradient Brand Band -->
-<div class="h-2 w-full bg-gradient-to-r from-primary via-tertiary-container to-secondary"></div>
-<!-- Ticket Top Segment -->
-<div class="p-space-lg flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<!-- Stylized S Brand Icon -->
-<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center shadow-inner">
-<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-<path d="M75 22C68 18 55 18 40 22C24 26 18 38 20 50C22 62 36 68 55 72C70 75 78 82 76 90C73 100 52 102 32 96" stroke="currentColor" stroke-linecap="round" stroke-width="14"></path>
-<rect fill="#006d3c" height="10" rx="2" width="10" x="68" y="14"></rect>
-<rect fill="#3975c2" height="8" rx="2" width="8" x="82" y="24"></rect>
-</svg>
-</div>
-<span class="font-label-lg text-label-lg text-on-surface font-bold tracking-tight">SMART.ECO</span>
-</div>
-<span class="inline-flex items-center px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
-          Pass Liberté 3 Jours
-        </span>
-</div>
-<div class="flex items-baseline justify-between pt-space-xs">
-<div>
-<span class="font-body-sm text-body-sm text-on-surface-variant block">Débit garanti</span>
-<span class="font-headline-sm text-headline-sm text-primary font-bold">Jusqu'à 45 Mbps</span>
-</div>
-<div class="text-right">
-<span class="font-body-sm text-body-sm text-on-surface-variant block">Payé via Kobara</span>
-<span class="font-numeric-stat text-numeric-stat text-on-surface">175 HTG</span>
-</div>
-</div>
-</div>
-<!-- Ticket Tear / Cutout Divider -->
-<div class="relative flex items-center justify-between h-6 bg-surface-container-lowest">
-<!-- Left semi-circle notch -->
-<div class="w-4 h-8 bg-surface rounded-r-full -ml-2 shadow-inner"></div>
-<!-- Dashed Line -->
-<div class="flex-1 mx-2 border-t-2 border-dashed border-outline-variant opacity-70"></div>
-<!-- Right semi-circle notch -->
-<div class="w-4 h-8 bg-surface rounded-l-full -mr-2 shadow-inner"></div>
-</div>
-<!-- Ticket Bottom Segment -->
-<div class="p-space-lg bg-surface-container-low flex flex-col gap-space-md">
-<!-- Monospace Code Box -->
-<div class="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-lowest shadow-sm">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Votre Code Voucher Unique</span>
-<div class="flex items-center gap-space-sm">
-<span class="font-numeric-stat text-numeric-stat text-primary tracking-widest select-all" id="voucherCode">SMART-9842-LIB3</span>
-</div>
-</div>
-<!-- Action Buttons Inside Ticket -->
-<div class="grid grid-cols-2 gap-space-sm">
-<button class="flex items-center justify-center gap-space-xs py-3 px-space-md rounded-full bg-surface-container-high text-on-surface active:scale-95 transition-all shadow-sm" id="copyBtn" type="button">
-<span class="material-symbols-outlined text-[18px] text-primary" id="copyIcon">content_copy</span>
-<span class="font-label-md text-label-md font-semibold text-primary" id="copyText">Copier le code</span>
-</button>
-<button class="flex items-center justify-center gap-space-xs py-3 px-space-md rounded-full bg-surface-container-high text-on-surface active:scale-95 transition-all shadow-sm" id="toggleQrBtn" type="button">
-<span class="material-symbols-outlined text-[18px] text-tertiary">qr_code_2</span>
-<span class="font-label-md text-label-md font-semibold text-tertiary">QR Code</span>
-</button>
-</div>
-<!-- Expandable QR Code Drawer -->
-<div class="hidden flex flex-col items-center p-space-md rounded-xl bg-surface-container-lowest shadow-inner animate-fadeIn" id="qrDrawer">
-<div class="p-space-sm bg-surface-container-lowest rounded-lg shadow-sm">
-<svg class="w-36 h-36" fill="none" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-<!-- QR Corner 1 -->
-<rect fill="#131B2E" height="30" rx="6" width="30" x="10" y="10"></rect>
-<rect fill="#ffffff" height="18" rx="3" width="18" x="16" y="16"></rect>
-<rect fill="#006098" height="10" rx="2" width="10" x="20" y="20"></rect>
-<!-- QR Corner 2 -->
-<rect fill="#131B2E" height="30" rx="6" width="30" x="80" y="10"></rect>
-<rect fill="#ffffff" height="18" rx="3" width="18" x="86" y="16"></rect>
-<rect fill="#006098" height="10" rx="2" width="10" x="90" y="20"></rect>
-<!-- QR Corner 3 -->
-<rect fill="#131B2E" height="30" rx="6" width="30" x="10" y="80"></rect>
-<rect fill="#ffffff" height="18" rx="3" width="18" x="16" y="86"></rect>
-<rect fill="#006098" height="10" rx="2" width="10" x="20" y="90"></rect>
-<!-- QR Data Pattern Matrix -->
-<rect fill="#131B2E" height="6" rx="1" width="6" x="46" y="12"></rect>
-<rect fill="#131B2E" height="6" rx="1" width="12" x="58" y="12"></rect>
-<rect fill="#006d3c" height="6" rx="1" width="18" x="46" y="24"></rect>
-<rect fill="#131B2E" height="12" rx="1" width="12" x="52" y="36"></rect>
-<rect fill="#131B2E" height="6" rx="1" width="6" x="70" y="36"></rect>
-<rect fill="#131B2E" height="6" rx="1" width="12" x="12" y="52"></rect>
-<rect fill="#006098" height="8" rx="1" width="8" x="30" y="52"></rect>
-<rect fill="#131B2E" height="14" rx="1" width="6" x="44" y="54"></rect>
-<rect fill="#006098" height="6" rx="1" width="14" x="56" y="54"></rect>
-<rect fill="#131B2E" height="6" rx="1" width="10" x="76" y="52"></rect>
-<rect fill="#006d3c" height="6" rx="1" width="16" x="92" y="52"></rect>
-<rect fill="#131B2E" height="8" rx="1" width="6" x="12" y="66"></rect>
-<rect fill="#131B2E" height="6" rx="1" width="12" x="24" y="66"></rect>
-<rect fill="#131B2E" height="14" rx="1" width="6" x="56" y="66"></rect>
-<rect fill="#131B2E" height="8" rx="1" width="18" x="68" y="66"></rect>
-<rect fill="#131B2E" height="14" rx="1" width="8" x="92" y="64"></rect>
-<rect fill="#131B2E" height="8" rx="1" width="12" x="46" y="86"></rect>
-<rect fill="#006d3c" height="12" rx="1" width="8" x="64" y="82"></rect>
-<rect fill="#131B2E" height="8" rx="1" width="12" x="78" y="82"></rect>
-<rect fill="#006098" height="12" rx="1" width="12" x="96" y="84"></rect>
-<rect fill="#131B2E" height="8" rx="1" width="20" x="46" y="100"></rect>
-<rect fill="#131B2E" height="12" rx="1" width="18" x="72" y="96"></rect>
-</svg>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant mt-space-xs">Scannez pour connexion automatique</span>
-</div>
-<!-- Metadata Specifications Table -->
-<div class="flex flex-col gap-space-xs pt-space-xs border-t border-outline-variant/30 text-on-surface-variant">
-<div class="flex items-center justify-between">
-<span class="font-body-sm text-body-sm">Durée de navigation :</span>
-<span class="font-label-sm text-label-sm text-on-surface font-semibold">3 Jours (72 Heures)</span>
-</div>
-<div class="flex items-center justify-between">
-<span class="font-body-sm text-body-sm">Délai d'activation :</span>
-<span class="font-label-sm text-label-sm text-secondary font-semibold">Valable 30 jours</span>
-</div>
-<div class="flex items-center justify-between">
-<span class="font-body-sm text-body-sm">Référence transaction :</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">KB-8924018</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Quick Guidance Card (iOS 17 Inset Group) -->
-<div class="w-full rounded-2xl bg-surface-container p-space-md shadow-sm mb-space-lg flex flex-col gap-space-md">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-[20px] text-primary">touch_app</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">Comment l'utiliser en 2 étapes</span>
-</div>
-<div class="flex flex-col gap-space-sm">
-<!-- Step 1 -->
-<div class="flex items-start gap-space-md p-space-sm rounded-xl bg-surface-container-lowest shadow-sm">
-<div class="w-7 h-7 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-label-sm shrink-0 mt-0.5">
-          1
-        </div>
-<div class="flex flex-col">
-<span class="font-label-md text-label-md text-on-surface font-medium">Connectez-vous au Wi-Fi</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Sélectionnez le réseau <strong class="text-primary font-semibold">SMART.ECO_Zone_Dubout</strong> dans vos réglages Wi-Fi.</span>
-</div>
-</div>
-<!-- Step 2 -->
-<div class="flex items-start gap-space-md p-space-sm rounded-xl bg-surface-container-lowest shadow-sm">
-<div class="w-7 h-7 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-label-sm shrink-0 mt-0.5">
-          2
-        </div>
-<div class="flex flex-col">
-<span class="font-label-md text-label-md text-on-surface font-medium">Débloquez votre accès</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Collez votre code <strong class="text-on-surface font-semibold">SMART-9842-LIB3</strong> sur le portail captif pour naviguer.</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Bottom Floating Call-To-Action Zone -->
-<div class="w-full flex flex-col gap-space-sm mt-auto pt-space-xs">
-<!-- Primary CTA Pill -->
-<button class="w-full h-14 rounded-full bg-gradient-to-r from-primary via-tertiary-container to-secondary text-on-primary flex items-center justify-center gap-space-xs shadow-lg shadow-primary/25 active:scale-[0.98] transition-all" id="activateNowBtn" type="button">
-<span class="font-label-lg text-label-lg font-semibold tracking-wide">Activer sur cet appareil maintenant</span>
-<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-</button>
-<!-- Secondary Receipt Button -->
-<button class="w-full py-3 rounded-full flex items-center justify-center gap-space-xs text-primary active:bg-surface-container-high transition-all" id="downloadPdfBtn" type="button">
-<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
-<span class="font-label-md text-label-md font-semibold">Enregistrer le reçu en photo / PDF</span>
-</button>
-</div>
-<!-- Dynamic Island Notification Toast (Hidden by default) -->
-<div class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 -translate-y-2" id="toastNotification">
-<div class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-inverse-surface text-inverse-on-surface shadow-2xl backdrop-blur-md">
-<span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
-<span class="font-label-sm text-label-sm font-medium" id="toastMsg">Code copié avec succès !</span>
-</div>
-</div>
-</div>
+</main>
+
 <script>
   (function() {
-    const realCode = localStorage.getItem('smarteco_voucher');
-    if (realCode) {
-      document.getElementById('voucherCode').innerText = realCode;
+    const NOMS = { heure: 'Forfait Heures', jour: 'Forfait Jour', semaine: 'Forfait Semaine', mois: 'Forfait Mois' };
+    const commande = JSON.parse(localStorage.getItem('smarteco_commande') || '{}');
+    if (commande.planId) {
+      document.getElementById('plan-nom').textContent = NOMS[commande.planId] || 'Votre accès est prêt';
     }
+
+    const realCode = localStorage.getItem('smarteco_voucher');
+    if (realCode) document.getElementById('voucherCode').textContent = realCode;
 
     const copyBtn = document.getElementById('copyBtn');
     const copyText = document.getElementById('copyText');
     const copyIcon = document.getElementById('copyIcon');
-    const voucherCode = document.getElementById('voucherCode').innerText.trim();
-    const toggleQrBtn = document.getElementById('toggleQrBtn');
-    const qrDrawer = document.getElementById('qrDrawer');
     const toast = document.getElementById('toastNotification');
-    const toastMsg = document.getElementById('toastMsg');
-    const activateNowBtn = document.getElementById('activateNowBtn');
-    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
 
-    function showToast(message) {
-      toastMsg.innerText = message;
+    copyBtn.addEventListener('click', () => {
+      const code = document.getElementById('voucherCode').textContent.trim();
+      if (code && code !== '—' && navigator.clipboard) {
+        navigator.clipboard.writeText(code).catch(() => {});
+      }
+      copyText.textContent = 'Copié !';
+      copyIcon.textContent = 'done';
       toast.classList.remove('opacity-0', '-translate-y-2');
       toast.classList.add('opacity-100', 'translate-y-0');
       setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', '-translate-y-2');
-      }, 2400);
-    }
-
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(voucherCode).catch(() => {});
-        }
-        copyText.innerText = "Copié !";
-        copyIcon.innerText = "done";
-        showToast("Code copié dans le presse-papier !");
-        
-        setTimeout(() => {
-          copyText.innerText = "Copier le code";
-          copyIcon.innerText = "content_copy";
-        }, 2200);
-      });
-    }
-
-    if (toggleQrBtn && qrDrawer) {
-      toggleQrBtn.addEventListener('click', () => {
-        qrDrawer.classList.toggle('hidden');
-      });
-    }
-
-    if (activateNowBtn) {
-      activateNowBtn.addEventListener('click', () => {
-        showToast("Connexion à la borne SMART.ECO en cours...");
-      });
-    }
-
-    if (downloadPdfBtn) {
-      downloadPdfBtn.addEventListener('click', () => {
-        showToast("Reçu téléchargé sur votre appareil.");
-      });
-    }
+        copyText.textContent = 'Copier le code';
+        copyIcon.textContent = 'content_copy';
+      }, 2000);
+    });
   })();
-</script></main>
+</script>
+
 </body></html>
