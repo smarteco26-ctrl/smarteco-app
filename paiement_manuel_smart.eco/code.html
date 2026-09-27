@@ -1,0 +1,225 @@
+<!DOCTYPE html><html class="h-full" lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>@layer base{html,body{width:100vw;min-height:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-lowest": "#ffffff", "surface-bright": "#faf8ff", "on-primary-fixed": "#001d33", "tertiary-container": "#3975c2", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", "surface-dim": "#d2d9f4", "surface-variant": "#dae2fd", "secondary": "#006d3c", "primary": "#006098", "tertiary-fixed": "#d5e3ff", "on-secondary-fixed": "#00210e", "error-container": "#ffdad6", "on-primary-fixed-variant": "#004a77", "inverse-surface": "#283044", "on-tertiary-container": "#fefcff", "tertiary-fixed-dim": "#a6c8ff", "surface-container-high": "#e2e7ff", "error": "#ba1a1a", "on-error-container": "#93000a", "surface-tint": "#00639c", "on-secondary": "#ffffff", "on-secondary-container": "#007440", "on-primary-container": "#fdfcff", "on-tertiary": "#ffffff", "inverse-primary": "#98cbff", "background": "#faf8ff", "outline-variant": "#bfc7d3", "surface-container-low": "#f2f3ff", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#004787", "on-tertiary-fixed": "#001c3b", "primary-fixed": "#cfe5ff", "on-secondary-fixed-variant": "#00522c", "inverse-on-surface": "#eef0ff", "surface-container-highest": "#dae2fd", "tertiary": "#145ca7", "outline": "#707882", "surface": "#faf8ff", "primary-fixed-dim": "#98cbff", "on-error": "#ffffff", "primary-container": "#007abf", "surface-container": "#eaedff", "secondary-fixed": "#72fda8", "secondary-fixed-dim": "#52df8e", "on-background": "#131b2e", "secondary-container": "#72fda8" }, borderRadius: { DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" }, spacing: { "margin-desktop": "2rem", "space-md": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2rem", "gutter-sm": "0.75rem" }, fontFamily: { "headline-md": ["Inter"], "label-lg": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-xl": ["Inter"], "body-md": ["Inter"], "headline-xl-mobile": ["Inter"], "numeric-stat": ["Inter"], "label-sm": ["Inter"] }, fontSize: { "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "label-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-sm": ["20px", { lineHeight: "25px", letterSpacing: "-0.012em", fontWeight: "600" }], "label-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "34px", letterSpacing: "-0.018em", fontWeight: "700" }], "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "body-lg": ["17px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "400" }], "headline-xl": ["34px", { lineHeight: "41px", letterSpacing: "-0.022em", fontWeight: "700" }], "body-md": ["15px", { lineHeight: "20px", letterSpacing: "-0.005em", fontWeight: "400" }], "headline-xl-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "700" }], "numeric-stat": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "700" }], "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }] } } } };</script>
+<style>body{min-height:max(884px,100dvh);}</style>
+</head><body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
+
+<header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+<div class="h-14 px-margin flex items-center justify-between">
+<button aria-label="Retour" class="w-11 h-11 -ml-space-xs rounded-full flex items-center justify-center text-primary active:scale-95 active:bg-surface-container transition-all" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back_ios_new</span></button>
+<span class="font-label-md text-label-md text-on-surface tracking-tight font-semibold">Paiement manuel</span>
+<div class="w-11 h-11"></div>
+</div>
+</header>
+
+<main class="flex-1 flex flex-col relative w-full pt-14 pb-safe bg-surface">
+
+<!-- ÉTAT 1 : Formulaire -->
+<div class="flex flex-col w-full pb-40" id="form-state">
+
+<section class="px-margin pt-space-md mb-space-md">
+<div class="bg-surface-container-low rounded-DEFAULT p-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Envoyez <span class="font-semibold text-on-surface" id="amount-due">75 HTG</span> puis complétez ce formulaire.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 hidden" id="fee-note">Le montant Natcash inclut déjà le frais de retrait.</p>
+</div>
+</section>
+
+<!-- Numéros de réception -->
+<section class="px-margin mb-space-lg">
+<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold mb-space-sm ml-1">Envoyer vers</h2>
+<div class="flex flex-col gap-gutter-sm">
+<div class="flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold text-xs">MC</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">MonCash</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">47971485</span>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold" onclick="navigator.clipboard.writeText('47971485')" type="button">Copier</button>
+</div>
+<div class="flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-tertiary font-bold text-xs">NC</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold">Natcash</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">33940805</span>
+</div>
+</div>
+<button class="font-label-sm text-label-sm text-primary font-semibold" onclick="navigator.clipboard.writeText('33940805')" type="button">Copier</button>
+</div>
+</div>
+</section>
+
+<!-- J'ai payé via -->
+<section class="px-margin mb-space-lg">
+<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold mb-space-sm ml-1">J'ai payé via</h2>
+<div class="grid grid-cols-2 gap-gutter-sm" id="methode-group">
+<button class="methode-btn h-12 rounded-DEFAULT bg-surface-container-lowest shadow-sm font-label-md text-label-md font-semibold text-on-surface-variant" data-methode="moncash" type="button">MonCash</button>
+<button class="methode-btn h-12 rounded-DEFAULT bg-surface-container-lowest shadow-sm font-label-md text-label-md font-semibold text-on-surface-variant" data-methode="natcash" type="button">Natcash</button>
+</div>
+</section>
+
+<!-- Numéro expéditeur -->
+<section class="px-margin mb-space-lg">
+<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold mb-space-sm ml-1">Votre numéro (expéditeur)</h2>
+<input class="w-full h-14 px-space-md rounded-DEFAULT bg-surface-container-lowest shadow-sm font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary" id="sender-phone" inputmode="tel" placeholder="Ex: 37 12 34 56" type="tel"/>
+</section>
+
+<!-- Upload preuve -->
+<section class="px-margin mb-space-lg">
+<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold mb-space-sm ml-1">Preuve de paiement</h2>
+<label class="flex flex-col items-center justify-center gap-space-xs w-full h-40 rounded-DEFAULT border-2 border-dashed border-outline-variant bg-surface-container-low cursor-pointer overflow-hidden" id="upload-zone">
+<span class="material-symbols-outlined text-[32px] text-primary" id="upload-icon">add_a_photo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="upload-label">Ajouter une capture d'écran</span>
+<input accept="image/*" class="hidden" id="proof-input" type="file"/>
+</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs px-1">Capture claire, non recadrée, montrant le montant et la transaction.</p>
+</section>
+
+</div>
+
+<!-- ÉTAT 2 : Vérification en cours -->
+<div class="hidden flex-col items-center justify-center px-margin pt-24 text-center" id="checking-state">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary-container via-tertiary to-primary flex items-center justify-center mb-space-lg animate-pulse">
+<span class="material-symbols-outlined text-[36px] text-on-primary">auto_awesome</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold mb-space-xs">SmartIA vérifie votre paiement</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Quelques secondes suffisent. Ne quittez pas cette page.</p>
+</div>
+
+<!-- ÉTAT 3 : Validé -->
+<div class="hidden flex-col items-center justify-center px-margin pt-24 text-center" id="success-state">
+<div class="w-20 h-20 rounded-full bg-secondary-container flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[36px] text-secondary">check_circle</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold mb-space-xs">Paiement validé</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mb-space-lg">Votre code voucher est prêt.</p>
+<button class="w-full h-[52px] rounded-full bg-gradient-to-r from-primary via-tertiary-container to-secondary text-on-primary font-label-lg text-label-lg font-semibold" type="button">Voir mon code voucher</button>
+</div>
+
+<!-- ÉTAT 4 : Refusé -->
+<div class="hidden flex-col items-center justify-center px-margin pt-24 text-center" id="refused-state">
+<div class="w-20 h-20 rounded-full bg-error-container flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[36px] text-error">error</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold mb-space-xs">Paiement non validé</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mb-space-lg">SmartIA n'a pas pu confirmer ce paiement. Contactez l'équipe pour vérification.</p>
+<button class="w-full h-[52px] rounded-full bg-[#25D366] text-white font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 mb-space-sm" onclick="window.open('https://wa.me/50947971485','_blank')" type="button">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span>Contacter l'administration (WhatsApp)</span>
+</button>
+<button class="w-full h-[52px] rounded-full bg-surface-container-lowest text-primary font-label-lg text-label-lg font-semibold shadow-sm" onclick="window.location.href='../smartia_assistant_smart.eco/code.html'" type="button">Parler à SmartIA</button>
+</div>
+
+</main>
+
+<!-- CTA fixe (uniquement état formulaire) -->
+<aside class="fixed bottom-0 left-0 right-0 z-40 bg-surface/85 backdrop-blur-2xl px-margin pt-space-sm pb-safe shadow-[0_-8px_30px_rgba(0,29,51,0.08)]" id="submit-bar">
+<div class="max-w-[430px] mx-auto flex flex-col gap-space-xs pb-space-xs">
+<button class="w-full h-[52px] rounded-full bg-gradient-to-r from-primary via-tertiary-container to-secondary text-on-primary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all duration-150" id="submit-proof-btn" type="button">
+<span>Envoyer pour vérification</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</aside>
+
+<script>
+  // Configuration : à adapter avec les infos réelles du client (nom, prénom, téléphone,
+  // planId, quantité) transmises par la page précédente (via localStorage ou l'URL).
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+
+  const commande = JSON.parse(localStorage.getItem("smarteco_commande") || "{}");
+  // Ex. attendu : { prenom, nom, telephone, planId, quantite }
+
+  let methodeChoisie = null;
+  document.querySelectorAll('.methode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.methode-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary');
+        b.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+      });
+      btn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      btn.classList.add('bg-primary', 'text-on-primary');
+      methodeChoisie = btn.dataset.methode;
+      document.getElementById('fee-note').classList.toggle('hidden', methodeChoisie !== 'natcash');
+    });
+  });
+
+  const fileInput = document.getElementById('proof-input');
+  const uploadZone = document.getElementById('upload-zone');
+  const uploadLabel = document.getElementById('upload-label');
+  const uploadIcon = document.getElementById('upload-icon');
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files[0]) {
+      uploadLabel.textContent = fileInput.files[0].name;
+      uploadIcon.textContent = 'check_circle';
+    }
+  });
+
+  document.getElementById('submit-proof-btn').addEventListener('click', async () => {
+    const numeroExpediteur = document.getElementById('sender-phone').value.trim();
+    const file = fileInput.files[0];
+    if (!numeroExpediteur || !file || !methodeChoisie) {
+      alert('Veuillez choisir la méthode, indiquer votre numéro et ajouter la preuve de paiement.');
+      return;
+    }
+
+    showState('checking-state');
+
+    try {
+      const imageBase64 = await fileToBase64(file);
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/verify-payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'apikey': SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify({
+          prenom: commande.prenom,
+          nom: commande.nom,
+          telephone: commande.telephone,
+          planId: commande.planId || 'jour',
+          quantite: commande.quantite || 1,
+          numeroExpediteur,
+          methode: methodeChoisie,
+          imageBase64,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.statut === 'valide') {
+        localStorage.setItem('smarteco_voucher', data.voucherCode || '');
+        showState('success-state');
+      } else {
+        showState('refused-state');
+      }
+    } catch (e) {
+      console.error(e);
+      showState('refused-state');
+    }
+  });
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]); // retire le préfixe data:...;base64,
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function showState(id) {
+    ['form-state', 'checking-state', 'success-state', 'refused-state'].forEach(s => {
+      document.getElementById(s).classList.add('hidden');
+    });
+    document.getElementById('submit-bar').classList.toggle('hidden', id !== 'form-state');
+    const el = document.getElementById(id);
+    el.classList.remove('hidden');
+    el.classList.add('flex');
+  }
+</script>
+
+</body></html>

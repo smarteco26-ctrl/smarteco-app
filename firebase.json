@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "stitch_smart.eco_community_wifi_app",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "/", "destination": "/bienvenue_smart.eco/code.html" }
+    ],
+    "headers": [
+      {
+        "source": "/sw.js",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      }
+    ]
+  }
+}
