@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Nouveau voucher — SMART.ECO Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { primary: "#006098", surface: "#faf8ff", "surface-container": "#eaedff", "surface-lowest": "#ffffff", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", secondary: "#006d3c", "secondary-container": "#72fda8" } } } };</script>
+<style>body{font-family:'Inter',sans-serif;background:#faf8ff;margin:0;}</style>
+</head><body class="min-h-screen flex flex-col">
+
+<header class="sticky top-0 bg-surface/90 backdrop-blur-xl shadow-sm z-10">
+<div class="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
+<h1 class="font-bold text-on-surface">Nouveau voucher</h1>
+<span class="text-xs text-on-surface-variant" id="admin-name"></span>
+</div>
+<div class="max-w-lg mx-auto px-4 flex gap-4 border-t border-surface-container overflow-x-auto">
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../paiements/index.html">Paiements</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../clients/index.html">Clients</a>
+<a class="py-2.5 text-sm font-semibold text-primary border-b-2 border-primary whitespace-nowrap" href="index.html">Nouveau voucher</a>
+</div>
+</header>
+
+<main class="flex-1 max-w-lg w-full mx-auto px-4 py-4">
+
+<div class="hidden flex-col items-center text-center gap-2 bg-secondary-container rounded-2xl p-6 mb-4" id="succes-card">
+<span class="material-symbols-outlined text-secondary text-[36px]">check_circle</span>
+<span class="text-sm text-on-surface">Voucher créé pour <strong id="succes-nom"></strong></span>
+<span class="font-mono text-lg tracking-widest text-primary" id="succes-code"></span>
+<button class="mt-2 text-sm text-primary font-semibold" id="nouveau-btn">Créer un autre voucher</button>
+</div>
+
+<form class="flex flex-col gap-3" id="form">
+<div class="bg-surface-lowest rounded-2xl shadow-sm overflow-hidden">
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Prénom du client</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="prenom" required type="text">
+</div>
+<div class="h-[1px] bg-surface-container mx-4"></div>
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Nom du client</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="nom" required type="text">
+</div>
+<div class="h-[1px] bg-surface-container mx-4"></div>
+<div class="px-4 py-3">
+<label class="text-xs text-on-surface-variant">Numéro de téléphone (sans indicatif)</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="telephone" inputmode="numeric" placeholder="37123456" required type="tel">
+</div>
+</div>
+
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-4">
+<label class="text-xs text-on-surface-variant">Forfait</label>
+<select class="w-full h-10 mt-1 bg-surface-container rounded-lg px-2 text-on-surface outline-none" id="planId">
+<option value="heure">Heures (15 HTG/h)</option>
+<option value="jour">Jour (75 HTG/j)</option>
+<option value="semaine">Semaine (350 HTG/sem)</option>
+<option value="mois">Mois (1100 HTG)</option>
+</select>
+<div class="flex items-center justify-between mt-3" id="qte-row">
+<label class="text-xs text-on-surface-variant">Quantité</label>
+<div class="flex items-center gap-3">
+<button class="w-8 h-8 rounded-full bg-surface-container text-primary" id="qte-moins" type="button">−</button>
+<span class="w-6 text-center" id="qte-val">1</span>
+<button class="w-8 h-8 rounded-full bg-surface-container text-primary" id="qte-plus" type="button">+</button>
+</div>
+</div>
+</div>
+
+<div class="bg-surface-lowest rounded-2xl shadow-sm px-4 py-3">
+<label class="text-xs text-on-surface-variant">Montant reçu en espèces (HTG)</label>
+<input class="w-full bg-transparent outline-none text-on-surface" id="montant" placeholder="Laisser vide = prix standard" type="number">
+</div>
+
+<button class="w-full h-12 rounded-full bg-primary text-white font-semibold" type="submit">Générer le voucher</button>
+</form>
+</main>
+
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+  const token = localStorage.getItem('smarteco_admin_token');
+  if (!token) window.location.href = '../login/index.html';
+  document.getElementById('admin-name').textContent = localStorage.getItem('smarteco_admin_nom') || '';
+
+  let qte = 1;
+  document.getElementById('qte-moins').addEventListener('click', () => { qte = Math.max(1, qte - 1); document.getElementById('qte-val').textContent = qte; });
+  document.getElementById('qte-plus').addEventListener('click', () => { qte = Math.min(30, qte + 1); document.getElementById('qte-val').textContent = qte; });
+
+  document.getElementById('planId').addEventListener('change', (e) => {
+    document.getElementById('qte-row').style.display = e.target.value === 'mois' ? 'none' : 'flex';
+  });
+
+  document.getElementById('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom = document.getElementById('nom').value.trim();
+    const telLocal = document.getElementById('telephone').value.replace(/\D/g, '');
+    const telephone = '509' + telLocal;
+    const planId = document.getElementById('planId').value;
+    const montantVal = document.getElementById('montant').value;
+    const montantRecu = montantVal ? Number(montantVal) : null;
+
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Création...';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-create-voucher`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'apikey': SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify({ token, prenom, nom, telephone, planId, quantite: qte, montantRecu }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('succes-nom').textContent = `${prenom} ${nom}`;
+        document.getElementById('succes-code').textContent = data.voucherCode;
+        document.getElementById('succes-card').classList.remove('hidden');
+        document.getElementById('succes-card').classList.add('flex');
+        document.getElementById('form').classList.add('hidden');
+      } else {
+        alert('Erreur : ' + (data.erreur || 'inconnue'));
+      }
+    } catch (err) {
+      alert('Erreur de connexion.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Générer le voucher';
+    }
+  });
+
+  document.getElementById('nouveau-btn').addEventListener('click', () => {
+    document.getElementById('succes-card').classList.add('hidden');
+    document.getElementById('succes-card').classList.remove('flex');
+    document.getElementById('form').classList.remove('hidden');
+    document.getElementById('form').reset();
+    qte = 1;
+    document.getElementById('qte-val').textContent = '1';
+  });
+</script>
+
+</body></html>
