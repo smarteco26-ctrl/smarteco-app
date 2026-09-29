@@ -29,6 +29,8 @@
 
 <script>
     const NOMS = { heure: 'Forfait Heures', jour: 'Forfait Jour', semaine: 'Forfait Semaine', mois: 'Forfait Mois' };
+    const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
     const PRIX = { heure: 15, jour: 75, semaine: 350, mois: 1100 };
     const SOUS_TITRES = {
       heure: 'Accès WiFi à l\'heure, selon votre besoin.',
@@ -46,6 +48,17 @@
     document.getElementById('plan-title').textContent = titre;
     document.getElementById('plan-subtitle').textContent = SOUS_TITRES[planId];
     document.getElementById('plan-price').textContent = montant + ' HTG';
+
+    fetch(`${SUPABASE_URL}/functions/v1/admin-plans`, {
+      headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'apikey': SUPABASE_ANON_KEY },
+    })
+      .then(r => r.json())
+      .then(data => {
+        (data.plans || []).forEach(p => { PRIX[p.id] = p.prix_unitaire; });
+        const montantReel = planId === 'mois' ? PRIX.mois : PRIX[planId] * quantite;
+        document.getElementById('plan-price').textContent = montantReel + ' HTG';
+      })
+      .catch(() => {});
 
     document.getElementById('submit-order-btn').addEventListener('click', () => {
       window.location.href = '../paiement_smart.eco/code.html';
