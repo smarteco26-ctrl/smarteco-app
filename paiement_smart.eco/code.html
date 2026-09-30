@@ -31,7 +31,7 @@
 <div class="flex flex-col gap-gutter-sm">
 
 <!-- Option Kobara -->
-<button class="text-left w-full flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-lowest shadow-sm active:scale-[0.98] transition-all" onclick="window.location.href='../d_tail_du_forfait_smart.eco/code.html'" type="button">
+<button class="text-left w-full flex items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-lowest shadow-sm active:scale-[0.98] transition-all" id="kobara-btn" type="button">
 <div class="flex items-center gap-space-md min-w-0">
 <div class="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary flex-shrink-0">
 <span class="material-symbols-outlined text-[22px]">bolt</span>
@@ -70,4 +70,50 @@
 
 </div>
 </main>
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+
+  document.getElementById('kobara-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('kobara-btn');
+    const commande = JSON.parse(localStorage.getItem('smarteco_commande') || '{}');
+    if (!commande.telephone || !commande.planId) {
+      window.location.href = '../identit_509_smart.eco/code.html';
+      return;
+    }
+
+    btn.style.opacity = '0.6';
+    btn.style.pointerEvents = 'none';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-kobara-payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'apikey': SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify({
+          telephone: commande.telephone,
+          prenom: commande.prenom,
+          nom: commande.nom,
+          planId: commande.planId,
+          quantite: commande.quantite || 1,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok && data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        alert("Impossible de démarrer le paiement Kobara. Réessayez ou choisissez le paiement manuel.");
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      }
+    } catch (e) {
+      alert("Erreur de connexion.");
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    }
+  });
+</script>
 </body></html>

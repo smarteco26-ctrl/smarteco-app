@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { primary: "#006098", secondary: "#006d3c", "secondary-container": "#72fda8", error: "#ba1a1a", "error-container": "#ffdad6", surface: "#faf8ff", "surface-container": "#eaedff", "surface-container-low": "#f2f3ff", "surface-container-lowest": "#ffffff", "on-surface": "#131b2e", "on-surface-variant": "#3f4851" } } } };</script>
+<style>body{font-family:'Inter',sans-serif;background:#faf8ff;margin:0;}</style>
+</head><body class="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+
+<div class="hidden flex-col items-center gap-3" id="attente">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[32px] animate-spin">progress_activity</span>
+</div>
+<h1 class="text-lg font-bold text-on-surface">Confirmation du paiement...</h1>
+<p class="text-sm text-on-surface-variant max-w-xs">Cela prend quelques secondes. Ne quittez pas cette page.</p>
+</div>
+
+<div class="hidden flex-col items-center gap-3" id="succes">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[32px]">check_circle</span>
+</div>
+<h1 class="text-lg font-bold text-on-surface">Paiement confirmé</h1>
+<p class="text-sm text-on-surface-variant">Votre voucher est prêt.</p>
+<button class="mt-3 h-12 px-6 rounded-full bg-primary text-white font-semibold" id="voir-voucher-btn">Voir mon code voucher</button>
+</div>
+
+<div class="hidden flex-col items-center gap-3" id="annule">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[32px]">cancel</span>
+</div>
+<h1 class="text-lg font-bold text-on-surface">Paiement annulé</h1>
+<button class="mt-3 h-12 px-6 rounded-full bg-primary text-white font-semibold" onclick="window.location.href='../paiement_smart.eco/code.html'">Réessayer</button>
+</div>
+
+<div class="hidden flex-col items-center gap-3" id="erreur">
+<div class="w-16 h-16 rounded-full bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-[32px]">error</span>
+</div>
+<h1 class="text-lg font-bold text-on-surface">Un problème est survenu</h1>
+<p class="text-sm text-on-surface-variant max-w-xs">Si un montant a été débité, contactez l'équipe SMART.ECO.</p>
+<a class="mt-3 h-12 px-6 rounded-full bg-secondary text-white font-semibold flex items-center gap-2" href="https://wa.me/50947971485" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span> Contacter WhatsApp
+</a>
+</div>
+
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  const statutUrl = params.get('statut');
+
+  function afficher(id) {
+    ['attente', 'succes', 'annule', 'erreur'].forEach(s => {
+      document.getElementById(s).classList.add('hidden');
+      document.getElementById(s).classList.remove('flex');
+    });
+    document.getElementById(id).classList.remove('hidden');
+    document.getElementById(id).classList.add('flex');
+  }
+
+  if (statutUrl === 'annule') {
+    afficher('annule');
+  } else if (!ref) {
+    afficher('erreur');
+  } else {
+    afficher('attente');
+    let tentatives = 0;
+
+    async function verifier() {
+      tentatives++;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/check-kobara-payment?ref=${encodeURIComponent(ref)}`, {
+          headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'apikey': SUPABASE_ANON_KEY },
+        });
+        const data = await res.json();
+
+        if (data.statut === 'valide' && data.voucherCode) {
+          localStorage.setItem('smarteco_voucher', data.voucherCode);
+          afficher('succes');
+          return;
+        }
+        if (data.statut === 'echoue') {
+          afficher('erreur');
+          return;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      if (tentatives < 30) {
+        setTimeout(verifier, 2000);
+      } else {
+        afficher('erreur');
+      }
+    }
+
+    verifier();
+  }
+
+  document.getElementById('voir-voucher-btn').addEventListener('click', () => {
+    window.location.href = '../billet_voucher_smart.eco/code.html';
+  });
+</script>
+
+</body></html>
