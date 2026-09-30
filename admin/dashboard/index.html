@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Tableau de bord — SMART.ECO Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { primary: "#006098", surface: "#faf8ff", "surface-container": "#eaedff", "surface-lowest": "#ffffff", "on-surface": "#131b2e", "on-surface-variant": "#3f4851", secondary: "#006d3c" } } } };</script>
+<style>body{font-family:'Inter',sans-serif;background:#faf8ff;margin:0;}</style>
+</head><body class="min-h-screen flex flex-col">
+
+<header class="sticky top-0 bg-surface/90 backdrop-blur-xl shadow-sm z-10">
+<div class="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
+<h1 class="font-bold text-on-surface">Tableau de bord</h1>
+<span class="text-xs text-on-surface-variant" id="admin-name"></span>
+</div>
+<div class="max-w-lg mx-auto px-4 flex gap-4 border-t border-surface-container overflow-x-auto">
+<a class="py-2.5 text-sm font-semibold text-primary border-b-2 border-primary whitespace-nowrap" href="index.html">Tableau de bord</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../paiements/index.html">Paiements</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../clients/index.html">Clients</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../nouveau/index.html">Nouveau voucher</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../tarifs/index.html">Tarifs</a>
+<a class="py-2.5 text-sm text-on-surface-variant whitespace-nowrap" href="../communaute/index.html">Communauté</a>
+</div>
+</header>
+
+<main class="flex-1 max-w-lg w-full mx-auto px-4 py-4 space-y-4">
+
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-3 text-center">
+<span class="text-xs text-on-surface-variant block mb-1">Aujourd'hui</span>
+<span class="text-lg font-bold text-on-surface" id="revenu-jour">—</span>
+</div>
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-3 text-center">
+<span class="text-xs text-on-surface-variant block mb-1">7 jours</span>
+<span class="text-lg font-bold text-on-surface" id="revenu-semaine">—</span>
+</div>
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-3 text-center">
+<span class="text-xs text-on-surface-variant block mb-1">30 jours</span>
+<span class="text-lg font-bold text-on-surface" id="revenu-mois">—</span>
+</div>
+</div>
+
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-4">
+<h2 class="font-semibold text-on-surface mb-2">Vouchers vendus</h2>
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Aujourd'hui : <strong class="text-on-surface" id="vouchers-jour">—</strong></span>
+<span>7 jours : <strong class="text-on-surface" id="vouchers-semaine">—</strong></span>
+<span>30 jours : <strong class="text-on-surface" id="vouchers-mois">—</strong></span>
+</div>
+</div>
+
+<div class="bg-surface-lowest rounded-2xl shadow-sm p-4">
+<h2 class="font-semibold text-on-surface mb-2">Revenus par canal (30 jours)</h2>
+<div class="flex flex-col gap-1.5 text-sm" id="par-source"></div>
+</div>
+
+</main>
+
+<script>
+  const SUPABASE_URL = "https://qdrarbfnbzirdevclgeg.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_M5gGWJgRMO-lTfm6bam28Q_UK55h4qo";
+  const token = localStorage.getItem('smarteco_admin_token');
+  if (!token) window.location.href = '../login/index.html';
+  document.getElementById('admin-name').textContent = localStorage.getItem('smarteco_admin_nom') || '';
+
+  const NOMS_SOURCE = { manuel: 'Paiement manuel', cash_admin: 'Cash (admin)', kobara: 'Kobara' };
+
+  async function charger() {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-dashboard?token=${encodeURIComponent(token)}`, {
+      headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'apikey': SUPABASE_ANON_KEY },
+    });
+    if (res.status === 401) { window.location.href = '../login/index.html'; return; }
+    const data = await res.json();
+
+    document.getElementById('revenu-jour').textContent = data.revenus.jour + ' HTG';
+    document.getElementById('revenu-semaine').textContent = data.revenus.semaine + ' HTG';
+    document.getElementById('revenu-mois').textContent = data.revenus.mois + ' HTG';
+    document.getElementById('vouchers-jour').textContent = data.vouchers.jour;
+    document.getElementById('vouchers-semaine').textContent = data.vouchers.semaine;
+    document.getElementById('vouchers-mois').textContent = data.vouchers.mois;
+
+    const parSourceEl = document.getElementById('par-source');
+    const entries = Object.entries(data.parSource || {});
+    parSourceEl.innerHTML = entries.length === 0
+      ? '<span class="text-on-surface-variant">Aucune donnée.</span>'
+      : entries.map(([src, montant]) => `
+          <div class="flex justify-between">
+            <span class="text-on-surface-variant">${NOMS_SOURCE[src] || src}</span>
+            <span class="font-semibold text-on-surface">${montant} HTG</span>
+          </div>`).join('');
+  }
+
+  charger();
+</script>
+
+</body></html>
